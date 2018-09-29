@@ -1,0 +1,39 @@
+import Foundation
+@testable import BitRates
+
+{% for type in types.structs where type.based.AutoBuildable or type|annotated:"AutoBuildable" %}{% if type.name != "AutoBuildable" %}
+
+// MARK: -  {{ type.name }}Builder
+
+extension {{ type.name }} {
+    private init() {
+        self.init({% for variable in type.allVariables %}{% if forloop.first%}{% else %}
+                  {% endif %}{{variable.name}}: nil{% if not forloop.last%},{% else %}){% endif %}
+                  {% endfor %}
+    }
+
+    static let builder = {{ type.name }}Builder()
+
+    class {{ type.name }}Builder {
+        private var buildObject: {{ type.name }}
+
+        init() {
+            self.buildObject = {{ type.name }}()
+        }
+
+        func build() -> {{ type.name }} {
+            defer {
+                self.buildObject = {{ type.name }}()
+            }
+            return self.buildObject
+        }
+        {% for variable in type.allVariables %}
+
+        func {{ variable.name }}(_ {{ variable.name }}: {{ variable.typeName }}) -> {{ type.name }}Builder {
+            self.buildObject.{{ variable.name }} = {{ variable.name }}
+            return self
+        }
+        {% endfor %}
+    }
+}
+{% endif %}{% endfor %}

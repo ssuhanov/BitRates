@@ -1,0 +1,334 @@
+import XCTest
+import UIKit
+@testable import BitRates
+
+public func XCTAssertFalse(_ expression: Bool?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
+    if let expression = expression {
+        XCTAssertFalse(expression, message, file: file, line: line)
+    } else {
+        XCTFail(message, file: file, line: line)
+    }
+}
+
+public func XCTAssertTrue(_ expression: Bool?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
+    if let expression = expression {
+        XCTAssertTrue(expression, message, file: file, line: line)
+    } else {
+        XCTFail(message, file: file, line: line)
+    }
+}
+
+public func XCTAssertEqual(_ expression1: Any?, _ expression2: Any?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
+    switch (expression1, expression2) {
+    case (let expression1 as AnyHashable, let expression2 as AnyHashable):
+        XCTAssertEqual(expression1, expression2, message, file: file, line: line)
+    case (let expression1 as [AnyHashable], let expression2 as [AnyHashable]):
+        XCTAssertEqual(expression1, expression2, message, file: file, line: line)
+    case (let expression1 as [AnyHashable: AnyHashable], let expression2 as [AnyHashable: AnyHashable]):
+        XCTAssertEqual(expression1, expression2, message, file: file, line: line)
+    case (nil, nil):
+        break
+    default:
+        XCTFail(message, file: file, line: line)
+    }
+}
+
+protocol MockInitable {
+    associatedtype MockType where MockType: Verifyable, MockType: Behaviorable
+    init(object: MockType)
+}
+
+protocol Verifyable {
+    associatedtype VerifyMock: MockInitable
+}
+
+protocol Behaviorable {
+    associatedtype BehaviorMock: MockInitable
+}
+
+func verify<ObjectType: Verifyable>(_ object: ObjectType) -> ObjectType.VerifyMock where ObjectType.VerifyMock.MockType == ObjectType {
+    return ObjectType.VerifyMock.init(object: object)
+}
+
+func when<ObjectType: Behaviorable>(_ object: ObjectType) -> ObjectType.BehaviorMock where ObjectType.BehaviorMock.MockType == ObjectType {
+    return ObjectType.BehaviorMock.init(object: object)
+}
+{% macro swiftifyMethodName name %}{{ name | replace:"(","_" | replace:")","" | replace:":","_" | replace:"`","" | snakeToCamelCase | lowerFirstWord }}{% endmacro %}
+{% macro swiftifyMethodNameVerifyable name %}{{ name | replace:"(","_" | replace:")","" | replace:":","_" | replace:"`","" | snakeToCamelCase | upperFirstLetter }}{% endmacro %}
+
+{% macro methodThrowableErrorDeclaration method %}
+    var {% call swiftifyMethodName method.selectorName %}ThrowableError: Error?
+{% endmacro %}
+
+{% macro methodThrowableErrorUsage method %}
+        if let error = {% call swiftifyMethodName method.selectorName %}ThrowableError {
+            throw error
+        }
+{% endmacro %}
+
+{% macro methodReceivedParameters method %}
+    {%if method.parameters.count == 1 %}
+        {% call swiftifyMethodName method.selectorName %}Received{% for param in method.parameters %}{{ param.name|upperFirstLetter }} = {{ param.name }}{% endfor %}
+    {% else %}
+    {% if not method.parameters.count == 0 %}
+        {% call swiftifyMethodName method.selectorName %}ReceivedArguments = ({% for param in method.parameters %}{{ param.name }}: {{ param.name }}{% if not forloop.last%}, {% endif %}{% endfor %})
+    {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro methodClosureName method %}{% call swiftifyMethodName method.selectorName %}Closure{% endmacro %}
+
+{% macro methodClosureDeclaration method %}
+    var {% call methodClosureName method %}: (({% for param in method.parameters %}{{ param.typeName }}{% if not forloop.last %}, {% endif %}{% endfor %}) {% if method.throws %}throws {% endif %}-> {% if method.isInitializer %}Void{% else %}{{ method.returnTypeName }}{% endif %})?
+{% endmacro %}
+
+{% macro methodClosureCallParameters method %}{% for param in method.parameters %}{{ param.name }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endmacro %}
+
+{% macro mockMethod method %}
+    // MARK: {{ method.shortName }}
+
+    {% if method.throws %}
+        {% call methodThrowableErrorDeclaration method %}
+    {% endif %}
+    {% if not method.isInitializer %}
+    var {% call swiftifyMethodName method.selectorName %}CallsCount = 0
+    var {% call swiftifyMethodName method.selectorName %}Called: Bool {
+        return {% call swiftifyMethodName method.selectorName %}CallsCount > 0
+    }
+    {% endif %}
+    {% if method.parameters.count == 1 %}
+    var {% call swiftifyMethodName method.selectorName %}Received{% for param in method.parameters %}{{ param.name|upperFirstLetter }}: {% if param.isClosure %}({% endif %}{{ param.typeName.unwrappedTypeName }}{% if param.isClosure %}){% endif %}?{% endfor %}
+    {% else %}{% if not method.parameters.count == 0 %}
+    var {% call swiftifyMethodName method.selectorName %}ReceivedArguments: ({% for param in method.parameters %}{{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})?
+    {% endif %}{% endif %}
+    {% if not method.returnTypeName.isVoid and not method.isInitializer %}
+    var {% call swiftifyMethodName method.selectorName %}ReturnValue: {{ method.returnTypeName }}{% if not method.returnTypeName.isOptional %}!{% endif %}
+    {% endif %}
+    {% call methodClosureDeclaration method %}
+
+{% if method.isInitializer %}
+    required {{ method.name }} {
+        {% call methodReceivedParameters method %}
+        {% call methodClosureName method %}?({% call methodClosureCallParameters method %})
+    }
+{% else %}
+    func {{ method.name }}{% if method.throws %} throws{% endif %}{% if not method.returnTypeName.isVoid %} -> {{ method.returnTypeName }}{% endif %} {
+        {% if method.throws %}
+        {% call methodThrowableErrorUsage method %}
+        {% endif %}
+        {% call swiftifyMethodName method.selectorName %}CallsCount += 1
+        {% call methodReceivedParameters method %}
+        {% if method.returnTypeName.isVoid %}
+        {% if method.throws %}try {% endif %}{% call methodClosureName method %}?({% call methodClosureCallParameters method %})
+        {% else %}
+        return {% if method.throws %}try {% endif %}{% call methodClosureName method %}.map({ {% if method.throws %}try {% endif %}$0({% call methodClosureCallParameters method %}) }) ?? {% call swiftifyMethodName method.selectorName %}ReturnValue
+        {% endif %}
+    }
+
+{% endif %}
+{% endmacro %}
+{% macro mockMethodVerifyable method %}
+
+    // MARK: {{ method.shortName }}
+    @discardableResult
+    func {% call swiftifyMethodName method.selectorName %}(file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+        XCTAssertTrue(self.object.{% call swiftifyMethodName method.selectorName %}Called, "{% call swiftifyMethodName method.selectorName %} should be called", file: file, line: line)
+        return Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %}(object: self.object)
+    }
+
+    @discardableResult
+    func {% call swiftifyMethodName method.selectorName %}NeverCalled(file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+        XCTAssertTrue(!self.object.{% call swiftifyMethodName method.selectorName %}Called, "{% call swiftifyMethodName method.selectorName %} should be never called", file: file, line: line)
+        return Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %}(object: self.object)
+    }
+
+    @discardableResult
+    func {% call swiftifyMethodName method.selectorName %}(times count: Int, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+        XCTAssertTrue(self.object.{% call swiftifyMethodName method.selectorName %}CallsCount == count, "{% call swiftifyMethodName method.selectorName %} should be called \(count) times", file: file, line: line)
+        return Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %}(object: self.object)
+    }
+
+    @discardableResult
+    func {% call swiftifyMethodName method.selectorName %}(atLeast count: Int, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+        XCTAssertTrue(self.object.{% call swiftifyMethodName method.selectorName %}CallsCount >= count, "{% call swiftifyMethodName method.selectorName %} should be called at least \(count) times", file: file, line: line)
+        return Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %}(object: self.object)
+    }
+
+    class Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+        private let object: {{ type.name }}Mock
+
+        init(object: {{ type.name }}Mock) {
+            self.object = object
+        }
+        {% if method.parameters.count == 1 %}
+        {% for param in method.parameters %}
+
+        @discardableResult
+        func {{ param.name }}(equalsTo {{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertEqual(self.object.{% call swiftifyMethodName method.selectorName %}Received{{ param.name|upperFirstLetter }}, {{ param.name }}, "{{ param.name }} should be \(String(describing: {{ param.name }}))", file: file, line: line)
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}<T>(is type: T.Type, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertTrue(self.object.{% call swiftifyMethodName method.selectorName %}Received{{ param.name|upperFirstLetter }} is T, "{{ param.name }} should be of \(T.self) type")
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}IsNil(file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertNil(self.object.{% call swiftifyMethodName method.selectorName %}Received{{ param.name|upperFirstLetter }}, "{{ param.name }} should be nil")
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}IsNotNil(file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertNotNil(self.object.{% call swiftifyMethodName method.selectorName %}Received{{ param.name|upperFirstLetter }}, "{{ param.name }} should not be nil")
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}(apply completion: ({% if param.isClosure %}({% endif %}{{ param.typeName.unwrappedTypeName }}{% if param.isClosure %}){% endif %}?) -> Void, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            completion(self.object.{% call swiftifyMethodName method.selectorName %}Received{{ param.name|upperFirstLetter }})
+            return self
+        }
+
+        {% if param.type.kind == "class" or param.type.kind == "protocol" %}
+        @discardableResult
+        func {{ param.name }}(identicalTo {{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertTrue(self.object.{% call swiftifyMethodName method.selectorName %}Received{{ param.name|upperFirstLetter }} === {{ param.name }}, "{{ param.name }} should be \(String(describing: {{ param.name }}))", file: file, line: line)
+            return self
+        }
+        {% endif %}
+        {% endfor %}
+        {% else %}{% if not method.parameters.count == 0 %}
+        {% for param in method.parameters %}
+
+        @discardableResult
+        func {{ param.name }}(equalsTo {{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertEqual(self.object.{% call swiftifyMethodName method.selectorName %}ReceivedArguments?.{{ param.name }}, {{ param.name }}, "{{ param.name }} should be \(String(describing: {{ param.name }}))", file: file, line: line)
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}<T>(is type: T.Type, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertTrue(self.object.{% call swiftifyMethodName method.selectorName %}ReceivedArguments?.{{ param.name }} is T, "{{ param.name }} should be of \(T.self) type")
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}IsNil(file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertNil(self.object.{% call swiftifyMethodName method.selectorName %}ReceivedArguments?.{{ param.name }}, "{{ param.name }} should be nil")
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}IsNotNil(file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertNotNil(self.object.{% call swiftifyMethodName method.selectorName %}ReceivedArguments?.{{ param.name }}, "{{ param.name }} should not be nil")
+            return self
+        }
+
+        @discardableResult
+        func {{ param.name }}(apply completion: ({% if param.isClosure %}({% endif %}{{ param.typeName.unwrappedTypeName }}{% if param.isClosure %}){% endif %}?) -> Void, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            completion(self.object.{% call swiftifyMethodName method.selectorName %}ReceivedArguments?.{{ param.name }})
+            return self
+        }
+
+        {% if param.type.kind == "class" or param.type.kind == "protocol" %}
+        @discardableResult
+        func {{ param.name }}(identicalTo {{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}, file: StaticString = #file, line: UInt = #line) -> Verify{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+            XCTAssertTrue(self.object.{% call swiftifyMethodName method.selectorName %}ReceivedArguments?.{{ param.name }} === {{ param.name }}, "{{ param.name }} should be \(String(describing: {{ param.name }}))", file: file, line: line)
+            return self
+        }
+        {% endif %}
+        {% endfor %}
+        {% endif %}{% endif %}
+    }
+{% endmacro %}
+{% macro mockMethodBehaviorable method %}
+
+    // MARK: {{ method.shortName }}
+    func {% call swiftifyMethodName method.selectorName %}() -> Behaviour{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+        return Behaviour{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %}(object: self.object)
+    }
+
+    class Behaviour{{ type.name }}Mock{% call swiftifyMethodNameVerifyable method.selectorName %} {
+        private let object: {{ type.name }}Mock
+
+        init(object: {{ type.name }}Mock) {
+            self.object = object
+        }
+
+        func then(_ completion: @escaping ({% for param in method.parameters %}{{ param.typeName }}{% if not forloop.last %}, {% endif %}{% endfor %}) {% if method.throws %}throws {% endif %}-> {% if method.isInitializer %}Void{% else %}{{ method.returnTypeName }}{% endif %}) {
+            self.object.{% call methodClosureName method %} = completion
+        }
+
+        {% if not method.returnTypeName.isVoid and not method.isInitializer %}
+        func thenReturn(_ value: {{ method.returnTypeName }}) {
+          self.object.{% call swiftifyMethodName method.selectorName %}ReturnValue = value
+        }
+        {% endif %}
+    }
+{% endmacro %}
+
+
+{% macro mockOptionalVariable variable %}
+    var {% call mockedVariableName variable %}: {{ variable.typeName }}
+{% endmacro %}
+
+{% macro mockNonOptionalArrayOrDictionaryVariable variable %}
+    var {% call mockedVariableName variable %}: {{ variable.typeName }} = {% if variable.isArray %}[]{% elif variable.isDictionary %}[:]{% endif %}
+{% endmacro %}
+
+{% macro mockNonOptionalVariable variable %}
+    var {% call mockedVariableName variable %}: {{ variable.typeName }} {
+        get { return {% call underlyingMockedVariableName variable %} }
+        set(value) { {% call underlyingMockedVariableName variable %} = value }
+    }
+    var {% call underlyingMockedVariableName variable %}: {{ variable.typeName }}!
+{% endmacro %}
+
+{% macro underlyingMockedVariableName variable %}underlying{{ variable.name|upperFirstLetter }}{% endmacro %}
+{% macro mockedVariableName variable %}{{ variable.name }}{% endmacro %}
+
+{% for type in types.protocols where type.based.AutoMockable or type|annotated:"AutoMockable" %}{% if type.name != "AutoMockable" %}
+// MARK: - {{ type.name }}Mock
+class {{ type.name }}Mock: {{ type.name }}, Verifyable, Behaviorable {
+    typealias VerifyMock = Verify{{ type.name }}Mock
+    typealias BehaviorMock = Behavior{{ type.name }}Mock
+{% for variable in type.allVariables|!definedInExtension %}
+    {% if variable.isOptional %}{% call mockOptionalVariable variable %}{% elif variable.isArray or variable.isDictionary %}{% call mockNonOptionalArrayOrDictionaryVariable variable %}{% else %}{% call mockNonOptionalVariable variable %}{% endif %}
+{% endfor %}
+
+{% for method in type.allMethods|!definedInExtension %}
+    {% call mockMethod method %}
+{% endfor %}
+}
+
+class Verify{{ type.name }}Mock: MockInitable {
+    typealias MockType = {{ type.name }}Mock
+    private let object: {{ type.name }}Mock
+
+    required init(object: {{ type.name }}Mock) {
+        self.object = object
+    }
+    {% for method in type.allMethods|!definedInExtension %}
+        {% call mockMethodVerifyable method %}
+    {% endfor %}
+
+}
+
+class Behavior{{ type.name }}Mock: MockInitable {
+    typealias MockType = {{ type.name }}Mock
+    private let object: {{ type.name }}Mock
+
+    required init(object: {{ type.name }}Mock) {
+        self.object = object
+    }
+    {% for method in type.allMethods|!definedInExtension %}
+        {% call mockMethodBehaviorable method %}
+    {% endfor %}
+
+}
+
+{% endif %}{% endfor %}
