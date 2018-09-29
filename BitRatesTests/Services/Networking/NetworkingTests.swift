@@ -37,9 +37,7 @@ class NetworkingTests: XCTestCase {
                 .completionHandler?(self.data, self.urlResponse, self.error)
         }
         
-        self.requestCompletion = {
-            self.serverResponse = $0
-        }
+        self.requestCompletion = { self.serverResponse = $0 }
         self.instance = Networking(urlSession: self.urlSessionMock)
     }
     

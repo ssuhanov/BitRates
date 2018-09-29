@@ -16,6 +16,13 @@ enum ServerResponse: Equatable {
     case failure (error: NSError)
 }
 
+extension Data {
+    func toJson() -> [String: AnyObject]? {
+        let jsonObject = try? JSONSerialization.jsonObject(with: self, options: [])
+        return jsonObject as? [String: AnyObject]
+    }
+}
+
 // sourcery: AutoMockable
 protocol NetworkingProtocol {
     func sendRequest(urlString: String, completion: ResponseResultCompletion?)
@@ -39,7 +46,7 @@ extension Networking: NetworkingProtocol {
         print("request started: \(urlString)")
         self.serverRequest(request) { (data, response, error) in
             print("request completed: \(urlString)")
-            // TODO: - print data as JSON to the console, something like this: print(data?.toJson())
+            print(data?.toJson() ?? "<no data>")
 
             let serverResponse: ServerResponse
             if let error = error {
