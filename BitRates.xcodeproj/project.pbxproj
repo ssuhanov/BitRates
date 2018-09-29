@@ -14,11 +14,11 @@
 		B2354418215F7A5A00390913 /* BitRates.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B2354416215F7A5A00390913 /* BitRates.xcdatamodeld */; };
 		B235441A215F7A5C00390913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2354419215F7A5C00390913 /* Assets.xcassets */; };
 		B235441D215F7A5C00390913 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B235441B215F7A5C00390913 /* LaunchScreen.storyboard */; };
-		B2354428215F7A5C00390913 /* BitRatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354427215F7A5C00390913 /* BitRatesTests.swift */; };
 		B2354439215F85A700390913 /* AutoBuildable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354437215F85A700390913 /* AutoBuildable.generated.swift */; };
 		B235443A215F85A700390913 /* AutoMockable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354438215F85A700390913 /* AutoMockable.generated.swift */; };
 		B235443E215F86AC00390913 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235443D215F86AC00390913 /* Networking.swift */; };
 		B2354440215F875A00390913 /* URLSessionInterlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235443F215F875A00390913 /* URLSessionInterlayer.swift */; };
+		B2354446215F938800390913 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354445215F938800390913 /* NetworkingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,12 +42,12 @@
 		B235441C215F7A5C00390913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B235441E215F7A5C00390913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2354423215F7A5C00390913 /* BitRatesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitRatesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2354427215F7A5C00390913 /* BitRatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitRatesTests.swift; sourceTree = "<group>"; };
 		B2354429215F7A5C00390913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2354437215F85A700390913 /* AutoBuildable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoBuildable.generated.swift; sourceTree = "<group>"; };
 		B2354438215F85A700390913 /* AutoMockable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.generated.swift; sourceTree = "<group>"; };
 		B235443D215F86AC00390913 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		B235443F215F875A00390913 /* URLSessionInterlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionInterlayer.swift; sourceTree = "<group>"; };
+		B2354445215F938800390913 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				B2354436215F856F00390913 /* Generated */,
-				B2354427215F7A5C00390913 /* BitRatesTests.swift */,
 				B2354441215F91F400390913 /* Services */,
 				B2354429215F7A5C00390913 /* Info.plist */,
 			);
@@ -162,6 +161,7 @@
 		B2354442215F920400390913 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B2354445215F938800390913 /* NetworkingTests.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -341,8 +341,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2354439215F85A700390913 /* AutoBuildable.generated.swift in Sources */,
-				B2354428215F7A5C00390913 /* BitRatesTests.swift in Sources */,
 				B235443A215F85A700390913 /* AutoMockable.generated.swift in Sources */,
+				B2354446215F938800390913 /* NetworkingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
