@@ -1,0 +1,24 @@
+## Build generated
+.DS_Store
+build/
+DerivedData
+
+## Tests generated
+BitRatesTests/Generated/
+
+## Various settings
+xcuserdata
+xcshareddata
+
+## Other
+*.xccheckout
+*.xcuserstate
+*.xcscheme
+Manifest.lock
+
+## Pods
+Pods/*
+BitRates.xcworkspace/contents.xcworkspacedata
+
+## AppCode
+.idea/
