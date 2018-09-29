@@ -17,6 +17,8 @@
 		B2354428215F7A5C00390913 /* BitRatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354427215F7A5C00390913 /* BitRatesTests.swift */; };
 		B2354439215F85A700390913 /* AutoBuildable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354437215F85A700390913 /* AutoBuildable.generated.swift */; };
 		B235443A215F85A700390913 /* AutoMockable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354438215F85A700390913 /* AutoMockable.generated.swift */; };
+		B235443E215F86AC00390913 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235443D215F86AC00390913 /* Networking.swift */; };
+		B2354440215F875A00390913 /* URLSessionInterlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235443F215F875A00390913 /* URLSessionInterlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		B2354429215F7A5C00390913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2354437215F85A700390913 /* AutoBuildable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoBuildable.generated.swift; sourceTree = "<group>"; };
 		B2354438215F85A700390913 /* AutoMockable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.generated.swift; sourceTree = "<group>"; };
+		B235443D215F86AC00390913 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		B235443F215F875A00390913 /* URLSessionInterlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionInterlayer.swift; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +102,7 @@
 		B235440E215F7A5A00390913 /* BitRates */ = {
 			isa = PBXGroup;
 			children = (
+				B235443B215F869600390913 /* Services */,
 				B235440F215F7A5A00390913 /* AppDelegate.swift */,
 				B2354411215F7A5A00390913 /* ViewController.swift */,
 				B2354413215F7A5A00390913 /* Main.storyboard */,
@@ -114,6 +119,7 @@
 			children = (
 				B2354436215F856F00390913 /* Generated */,
 				B2354427215F7A5C00390913 /* BitRatesTests.swift */,
+				B2354441215F91F400390913 /* Services */,
 				B2354429215F7A5C00390913 /* Info.plist */,
 			);
 			path = BitRatesTests;
@@ -126,6 +132,38 @@
 				B2354438215F85A700390913 /* AutoMockable.generated.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		B235443B215F869600390913 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B235443C215F869F00390913 /* Networking */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B235443C215F869F00390913 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B235443D215F86AC00390913 /* Networking.swift */,
+				B235443F215F875A00390913 /* URLSessionInterlayer.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B2354441215F91F400390913 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B2354442215F920400390913 /* Networking */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B2354442215F920400390913 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		F6E40EBE4C0D6F5B90217940 /* Pods */ = {
@@ -293,6 +331,8 @@
 				B2354418215F7A5A00390913 /* BitRates.xcdatamodeld in Sources */,
 				B2354412215F7A5A00390913 /* ViewController.swift in Sources */,
 				B2354410215F7A5A00390913 /* AppDelegate.swift in Sources */,
+				B2354440215F875A00390913 /* URLSessionInterlayer.swift in Sources */,
+				B235443E215F86AC00390913 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
