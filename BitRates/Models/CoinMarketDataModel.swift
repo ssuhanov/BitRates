@@ -9,7 +9,7 @@
 import Foundation
 
 // sourcery: AutoBuildable
-struct CMDataModel: Codable, Equatable {
+struct CoinMarketDataModel: Codable, Equatable {
     var data: CMData?
 }
 

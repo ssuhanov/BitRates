@@ -23,6 +23,7 @@
 		B235445E2160B46F00390913 /* CoinMarketDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235445D2160B46F00390913 /* CoinMarketDataModel.swift */; };
 		B23544602160B54B00390913 /* DataDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235445F2160B54B00390913 /* DataDeserializer.swift */; };
 		B23544622160B75100390913 /* DataDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23544612160B75100390913 /* DataDeserializerTests.swift */; };
+		B23544642160B99800390913 /* CryptoCompareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23544632160B99800390913 /* CryptoCompareDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		B235445D2160B46F00390913 /* CoinMarketDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketDataModel.swift; sourceTree = "<group>"; };
 		B235445F2160B54B00390913 /* DataDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDeserializer.swift; sourceTree = "<group>"; };
 		B23544612160B75100390913 /* DataDeserializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDeserializerTests.swift; sourceTree = "<group>"; };
+		B23544632160B99800390913 /* CryptoCompareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCompareDataModel.swift; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				B235445D2160B46F00390913 /* CoinMarketDataModel.swift */,
+				B23544632160B99800390913 /* CryptoCompareDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23544642160B99800390913 /* CryptoCompareDataModel.swift in Sources */,
 				B2354418215F7A5A00390913 /* BitRates.xcdatamodeld in Sources */,
 				B2354412215F7A5A00390913 /* ViewController.swift in Sources */,
 				B2354449215F9B5400390913 /* ApplicationConstants.swift in Sources */,
