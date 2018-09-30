@@ -8,10 +8,12 @@
 
 import Foundation
 
+// sourcery: AutoBuildable
 struct CMDataModel: Codable, Equatable {
     var data: CMData?
 }
 
+// sourcery: AutoBuildable
 struct CMData: Codable, Equatable {
     var the1: CMThe1?
     
@@ -20,6 +22,7 @@ struct CMData: Codable, Equatable {
     }
 }
 
+// sourcery: AutoBuildable
 struct CMThe1: Codable, Equatable {
     var lastUpdated: Int?
     var quotes: CMQuotes?
@@ -30,6 +33,7 @@ struct CMThe1: Codable, Equatable {
     }
 }
 
+// sourcery: AutoBuildable
 struct CMQuotes: Codable, Equatable {
     var usd: CMUsd?
     
@@ -38,6 +42,7 @@ struct CMQuotes: Codable, Equatable {
     }
 }
 
+// sourcery: AutoBuildable
 struct CMUsd: Codable, Equatable {
     var price: Double?
 }
