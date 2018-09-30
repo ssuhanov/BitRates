@@ -19,6 +19,9 @@ protocol MainViewProtocol: class {
 class MainView: UIViewController {
     var presenter: MainPresenterProtocol!
     
+    @IBOutlet weak var CoinMarketLabel: UILabel!
+    @IBOutlet weak var CryptoCompareLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.presenter = MainPresenter(view: self)
@@ -26,6 +29,16 @@ class MainView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.updatePrices()
+    }
+    
+    @IBAction func refreshButtonPressed(_ sender: UIButton) {
+        self.updatePrices()
+    }
+    
+    private func updatePrices() {
+        self.CoinMarketLabel.text = "Coin Market: updating..."
+        self.CryptoCompareLabel.text = "Crypto Compare: updating..."
         self.presenter.updateCoinMarketPrice()
         self.presenter.updateCryptoComparePrice()
     }
@@ -33,18 +46,26 @@ class MainView: UIViewController {
 
 extension MainView: MainViewProtocol {
     func updateCoinMarketPrice(timestamp: Int, price: Double) {
-        // TODO: - update coin market price on UI here
+        DispatchQueue.main.async {
+            self.CoinMarketLabel.text = "Coin Market:\ntimestamp: \(timestamp)\nprice: \(price)"
+        }
     }
     
     func showCoinMarketError() {
-        // TODO: - show coin market error here
+        DispatchQueue.main.async {
+            self.CoinMarketLabel.text = "Coin Market: error"
+        }
     }
     
     func updateCryptoComparePrice(timestamp: Int, price: Double) {
-        // TODO: - update crypto compare price on UI here
+        DispatchQueue.main.async {
+            self.CryptoCompareLabel.text = "Crypto Compare:\ntimestamp: \(timestamp)\nprice: \(price)"
+        }
     }
     
     func showCryptoCompareError() {
-        // TODO: - show crypto compare error here
+        DispatchQueue.main.async {
+            self.CryptoCompareLabel.text = "Crypto Compare: error"
+        }
     }
 }
