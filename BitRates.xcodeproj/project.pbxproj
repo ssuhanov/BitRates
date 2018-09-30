@@ -20,6 +20,7 @@
 		B2354440215F875A00390913 /* URLSessionInterlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235443F215F875A00390913 /* URLSessionInterlayer.swift */; };
 		B2354446215F938800390913 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354445215F938800390913 /* NetworkingTests.swift */; };
 		B2354449215F9B5400390913 /* ApplicationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354448215F9B5400390913 /* ApplicationConstants.swift */; };
+		B235445E2160B46F00390913 /* CoinMarketDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235445D2160B46F00390913 /* CoinMarketDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		B235443F215F875A00390913 /* URLSessionInterlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionInterlayer.swift; sourceTree = "<group>"; };
 		B2354445215F938800390913 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		B2354448215F9B5400390913 /* ApplicationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConstants.swift; sourceTree = "<group>"; };
+		B235445D2160B46F00390913 /* CoinMarketDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketDataModel.swift; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				B235443B215F869600390913 /* Services */,
+				B235445B2160B43D00390913 /* Models */,
 				B2354447215F9B3E00390913 /* Common */,
 				B235440F215F7A5A00390913 /* AppDelegate.swift */,
 				B2354411215F7A5A00390913 /* ViewController.swift */,
@@ -175,6 +178,14 @@
 				B2354448215F9B5400390913 /* ApplicationConstants.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		B235445B2160B43D00390913 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B235445D2160B46F00390913 /* CoinMarketDataModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F6E40EBE4C0D6F5B90217940 /* Pods */ = {
@@ -343,6 +354,7 @@
 				B2354412215F7A5A00390913 /* ViewController.swift in Sources */,
 				B2354449215F9B5400390913 /* ApplicationConstants.swift in Sources */,
 				B2354410215F7A5A00390913 /* AppDelegate.swift in Sources */,
+				B235445E2160B46F00390913 /* CoinMarketDataModel.swift in Sources */,
 				B2354440215F875A00390913 /* URLSessionInterlayer.swift in Sources */,
 				B235443E215F86AC00390913 /* Networking.swift in Sources */,
 			);
