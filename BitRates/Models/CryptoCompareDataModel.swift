@@ -8,6 +8,7 @@
 
 import Foundation
 
+// sourcery: AutoBuildable
 struct CryptoCompareDataModel: Codable, Equatable {
     var raw: CCRaw?
     
@@ -16,6 +17,7 @@ struct CryptoCompareDataModel: Codable, Equatable {
     }
 }
 
+// sourcery: AutoBuildable
 struct CCRaw: Codable, Equatable {
     var btc: CCBtc?
     
@@ -24,6 +26,7 @@ struct CCRaw: Codable, Equatable {
     }
 }
 
+// sourcery: AutoBuildable
 struct CCBtc: Codable, Equatable {
     var usd: CCUsd?
     
@@ -32,6 +35,7 @@ struct CCBtc: Codable, Equatable {
     }
 }
 
+// sourcery: AutoBuildable
 struct CCUsd: Codable, Equatable {
     var price: Double?
     var lastUpdate: Int?

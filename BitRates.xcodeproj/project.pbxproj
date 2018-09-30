@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		741177706256441BD79B7489 /* Pods_BitRatesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */; };
 		B2354410215F7A5A00390913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235440F215F7A5A00390913 /* AppDelegate.swift */; };
-		B2354412215F7A5A00390913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354411215F7A5A00390913 /* ViewController.swift */; };
-		B2354415215F7A5A00390913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2354413215F7A5A00390913 /* Main.storyboard */; };
+		B2354412215F7A5A00390913 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354411215F7A5A00390913 /* MainView.swift */; };
+		B2354415215F7A5A00390913 /* MainView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2354413215F7A5A00390913 /* MainView.storyboard */; };
 		B2354418215F7A5A00390913 /* BitRates.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B2354416215F7A5A00390913 /* BitRates.xcdatamodeld */; };
 		B235441A215F7A5C00390913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2354419215F7A5C00390913 /* Assets.xcassets */; };
 		B235441D215F7A5C00390913 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B235441B215F7A5C00390913 /* LaunchScreen.storyboard */; };
@@ -24,6 +24,8 @@
 		B23544602160B54B00390913 /* DataDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235445F2160B54B00390913 /* DataDeserializer.swift */; };
 		B23544622160B75100390913 /* DataDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23544612160B75100390913 /* DataDeserializerTests.swift */; };
 		B23544642160B99800390913 /* CryptoCompareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23544632160B99800390913 /* CryptoCompareDataModel.swift */; };
+		B23544682160BB9000390913 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23544672160BB9000390913 /* MainPresenter.swift */; };
+		B235446C2160BCC600390913 /* MainPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235446B2160BCC600390913 /* MainPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +42,8 @@
 		09ABCC3EA4E6FC2AA1C4F528 /* Pods-BitRatesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B235440C215F7A5A00390913 /* BitRates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitRates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B235440F215F7A5A00390913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B2354411215F7A5A00390913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B2354414215F7A5A00390913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B2354411215F7A5A00390913 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		B2354414215F7A5A00390913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainView.storyboard; sourceTree = "<group>"; };
 		B2354417215F7A5A00390913 /* BitRates.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BitRates.xcdatamodel; sourceTree = "<group>"; };
 		B2354419215F7A5C00390913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B235441C215F7A5C00390913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,8 @@
 		B235445F2160B54B00390913 /* DataDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDeserializer.swift; sourceTree = "<group>"; };
 		B23544612160B75100390913 /* DataDeserializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDeserializerTests.swift; sourceTree = "<group>"; };
 		B23544632160B99800390913 /* CryptoCompareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCompareDataModel.swift; sourceTree = "<group>"; };
+		B23544672160BB9000390913 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		B235446B2160BCC600390913 /* MainPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterTests.swift; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,12 +116,11 @@
 		B235440E215F7A5A00390913 /* BitRates */ = {
 			isa = PBXGroup;
 			children = (
+				B23544652160BB3E00390913 /* Modules */,
 				B235443B215F869600390913 /* Services */,
 				B235445B2160B43D00390913 /* Models */,
 				B2354447215F9B3E00390913 /* Common */,
 				B235440F215F7A5A00390913 /* AppDelegate.swift */,
-				B2354411215F7A5A00390913 /* ViewController.swift */,
-				B2354413215F7A5A00390913 /* Main.storyboard */,
 				B2354419215F7A5C00390913 /* Assets.xcassets */,
 				B235441B215F7A5C00390913 /* LaunchScreen.storyboard */,
 				B235441E215F7A5C00390913 /* Info.plist */,
@@ -130,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				B2354436215F856F00390913 /* Generated */,
+				B23544692160BC7900390913 /* Modules */,
 				B2354441215F91F400390913 /* Services */,
 				B2354429215F7A5C00390913 /* Info.plist */,
 			);
@@ -195,6 +199,40 @@
 				B23544632160B99800390913 /* CryptoCompareDataModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B23544652160BB3E00390913 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B23544662160BB5200390913 /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B23544662160BB5200390913 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B2354413215F7A5A00390913 /* MainView.storyboard */,
+				B2354411215F7A5A00390913 /* MainView.swift */,
+				B23544672160BB9000390913 /* MainPresenter.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B23544692160BC7900390913 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B235446A2160BC8200390913 /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B235446A2160BC8200390913 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B235446B2160BCC600390913 /* MainPresenterTests.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		F6E40EBE4C0D6F5B90217940 /* Pods */ = {
@@ -292,7 +330,7 @@
 			files = (
 				B235441D215F7A5C00390913 /* LaunchScreen.storyboard in Resources */,
 				B235441A215F7A5C00390913 /* Assets.xcassets in Resources */,
-				B2354415215F7A5A00390913 /* Main.storyboard in Resources */,
+				B2354415215F7A5A00390913 /* MainView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,9 +399,10 @@
 			files = (
 				B23544642160B99800390913 /* CryptoCompareDataModel.swift in Sources */,
 				B2354418215F7A5A00390913 /* BitRates.xcdatamodeld in Sources */,
-				B2354412215F7A5A00390913 /* ViewController.swift in Sources */,
+				B2354412215F7A5A00390913 /* MainView.swift in Sources */,
 				B2354449215F9B5400390913 /* ApplicationConstants.swift in Sources */,
 				B2354410215F7A5A00390913 /* AppDelegate.swift in Sources */,
+				B23544682160BB9000390913 /* MainPresenter.swift in Sources */,
 				B235445E2160B46F00390913 /* CoinMarketDataModel.swift in Sources */,
 				B2354440215F875A00390913 /* URLSessionInterlayer.swift in Sources */,
 				B23544602160B54B00390913 /* DataDeserializer.swift in Sources */,
@@ -377,6 +416,7 @@
 			files = (
 				B2354439215F85A700390913 /* AutoBuildable.generated.swift in Sources */,
 				B235443A215F85A700390913 /* AutoMockable.generated.swift in Sources */,
+				B235446C2160BCC600390913 /* MainPresenterTests.swift in Sources */,
 				B23544622160B75100390913 /* DataDeserializerTests.swift in Sources */,
 				B2354446215F938800390913 /* NetworkingTests.swift in Sources */,
 			);
@@ -393,12 +433,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B2354413215F7A5A00390913 /* Main.storyboard */ = {
+		B2354413215F7A5A00390913 /* MainView.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B2354414215F7A5A00390913 /* Base */,
 			);
-			name = Main.storyboard;
+			name = MainView.storyboard;
 			sourceTree = "<group>";
 		};
 		B235441B215F7A5C00390913 /* LaunchScreen.storyboard */ = {
