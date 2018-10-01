@@ -15,7 +15,7 @@ class CoreDataManager {
     static let shared = CoreDataManager()
     
     fileprivate lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "UnitedHelp")
+        let container = NSPersistentContainer(name: "BitRates")
         container.loadPersistentStores(completionHandler: { (_, error) in
             error.map { print("Load persisten stores failed with error \($0.localizedDescription)") }
         })
