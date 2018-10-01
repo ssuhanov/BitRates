@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		741177706256441BD79B7489 /* Pods_BitRatesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */; };
+		A6753D9B04B38A5C672C537C /* Pods_BitRates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C5CDC7243C18A3B5A0A111 /* Pods_BitRates.framework */; };
 		B2354410215F7A5A00390913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235440F215F7A5A00390913 /* AppDelegate.swift */; };
 		B2354412215F7A5A00390913 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2354411215F7A5A00390913 /* MainView.swift */; };
 		B2354415215F7A5A00390913 /* MainView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2354413215F7A5A00390913 /* MainView.storyboard */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		09ABCC3EA4E6FC2AA1C4F528 /* Pods-BitRatesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		66F5318D70438B2946FF75C7 /* Pods-BitRates.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRates.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BitRates/Pods-BitRates.debug.xcconfig"; sourceTree = "<group>"; };
 		B235440C215F7A5A00390913 /* BitRates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitRates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B235440F215F7A5A00390913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2354411215F7A5A00390913 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,8 @@
 		B235446F2162006200390913 /* PriceGettersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceGettersTests.swift; sourceTree = "<group>"; };
 		B2BD548D216221E700AAE3E0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2BD548F216223C000AAE3E0 /* DB_Prices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_Prices.swift; sourceTree = "<group>"; };
+		B7C5CDC7243C18A3B5A0A111 /* Pods_BitRates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2DBD6F943A202C9A811E874 /* Pods-BitRates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRates.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRates/Pods-BitRates.release.xcconfig"; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6753D9B04B38A5C672C537C /* Pods_BitRates.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */,
+				B7C5CDC7243C18A3B5A0A111 /* Pods_BitRates.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -252,6 +258,8 @@
 			children = (
 				09ABCC3EA4E6FC2AA1C4F528 /* Pods-BitRatesTests.debug.xcconfig */,
 				FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */,
+				66F5318D70438B2946FF75C7 /* Pods-BitRates.debug.xcconfig */,
+				C2DBD6F943A202C9A811E874 /* Pods-BitRates.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -263,10 +271,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B235442C215F7A5C00390913 /* Build configuration list for PBXNativeTarget "BitRates" */;
 			buildPhases = (
+				05B8D0CECA5C982C9F292EEB /* [CP] Check Pods Manifest.lock */,
 				B2354433215F845900390913 /* TODOs and FIXMEs */,
 				B2354408215F7A5A00390913 /* Sources */,
 				B2354409215F7A5A00390913 /* Frameworks */,
 				B235440A215F7A5A00390913 /* Resources */,
+				8003B7E73A28D527BD228D6C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -356,6 +366,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05B8D0CECA5C982C9F292EEB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BitRates-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8003B7E73A28D527BD228D6C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BitRates/Pods-BitRates-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftCharts/SwiftCharts.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftCharts.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BitRates/Pods-BitRates-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B2354432215F83A800390913 /* Sourcery */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -584,6 +630,7 @@
 		};
 		B235442D215F7A5C00390913 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66F5318D70438B2946FF75C7 /* Pods-BitRates.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -602,6 +649,7 @@
 		};
 		B235442E215F7A5C00390913 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2DBD6F943A202C9A811E874 /* Pods-BitRates.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

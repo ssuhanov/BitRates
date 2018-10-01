@@ -12,7 +12,7 @@ private let Timeout: TimeInterval = 60.0
 
 // sourcery: AutoMockable
 protocol MainPresenterProtocol {
-    func updatePrices()
+    func updatePrices(disableRefresh: Bool)
 }
 
 class MainPresenter {
@@ -34,7 +34,7 @@ class MainPresenter {
 }
 
 extension MainPresenter: MainPresenterProtocol {
-    func updatePrices() {
+    func updatePrices(disableRefresh: Bool) {
         
         let group = DispatchGroup()
         
@@ -57,10 +57,12 @@ extension MainPresenter: MainPresenterProtocol {
                                  cryptoComparePrice: cryptoComparePriceWithTimestamp.price) { _ in
                                     DB_Prices.fetchAllByTimestamp().map { self?.view.updateChart(prices: $0) }
                 }
-                self?.view.disableRefreshButton()
-                DispatchQueue.main.asyncAfter(deadline: .now() + Timeout, execute: {
-                    self?.view.enableRefreshButton()
-                })
+                if disableRefresh {
+                    self?.view.disableRefreshButton()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Timeout, execute: {
+                        self?.view.enableRefreshButton()
+                    })
+                }
             } else {
                 self?.view.showError()
             }

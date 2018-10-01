@@ -1,16 +1,20 @@
 PODS:
   - Sourcery (0.15.0)
+  - SwiftCharts (0.6.2)
 
 DEPENDENCIES:
   - Sourcery
+  - SwiftCharts
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Sourcery
+    - SwiftCharts
 
 SPEC CHECKSUMS:
   Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
+  SwiftCharts: bacd8c02aea5385c565b3819a0ef5c871cd6179d
 
-PODFILE CHECKSUM: a8762f8bb2ac70050577b406c05fac73aeb2a9b0
+PODFILE CHECKSUM: 5983f355af3624812c83ec6f0ebe9c5b31bb86d9
 
 COCOAPODS: 1.5.3
