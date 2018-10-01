@@ -40,3 +40,36 @@ class CoreDataManager {
         completion?(contextDidSave, saveError)
     }
 }
+
+extension NSManagedObject {
+    private static func entityDescription() -> NSEntityDescription? {
+        return NSEntityDescription.entity(forEntityName: String(describing: self), in: CoreDataManager.shared.getContext())
+    }
+    
+    private static func createPrivate<T: NSManagedObject>() -> T? {
+        if let entityDescription = entityDescription() {
+            return T(entity: entityDescription, insertInto: CoreDataManager.shared.getContext())
+        }
+        
+        return nil
+    }
+    
+    static func create() -> Self? {
+        return createPrivate()
+    }
+    
+    static func findAll(sortedBy: String, ascending: Bool = true) -> [NSManagedObject]? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: self))
+        let sortDescriptor = NSSortDescriptor(key: sortedBy, ascending: ascending)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return findAllWithRequest(fetchRequest)
+    }
+    
+    private static func findAllWithRequest(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) -> [NSManagedObject]? {
+        if let results: [NSFetchRequestResult] = try? CoreDataManager.shared.getContext().fetch(fetchRequest) {
+            return results as? [NSManagedObject]
+        }
+        
+        return nil
+    }
+}
