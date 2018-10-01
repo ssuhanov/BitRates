@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,21 +15,37 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainView" customModule="BitRates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Knp-iK-cLy">
-                                <rect key="frame" x="161" y="617" width="53" height="30"/>
+                                <rect key="frame" x="133.5" y="518" width="53" height="30"/>
                                 <state key="normal" title="Refresh"/>
                                 <connections>
                                     <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jsr-eU-FiQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crypto compare" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sk5-Gj-1ZG">
+                                <rect key="frame" x="206" y="36" width="98" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coin market" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWW-zC-WjM">
+                                <rect key="frame" x="16" y="36" width="73" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Knp-iK-cLy" secondAttribute="bottom" constant="20" id="8uO-iZ-Op0"/>
+                            <constraint firstItem="WWW-zC-WjM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="AJg-F5-P3o"/>
+                            <constraint firstItem="WWW-zC-WjM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="Z8E-Xn-usx"/>
+                            <constraint firstItem="sk5-Gj-1ZG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="dRz-Rm-oCV"/>
                             <constraint firstItem="Knp-iK-cLy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gPZ-aG-TZL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sk5-Gj-1ZG" secondAttribute="trailing" constant="16" id="yes-PS-rGr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
