@@ -10,51 +10,53 @@ import Foundation
 
 // sourcery: AutoMockable
 protocol MainPresenterProtocol {
-    func updateCoinMarketPrice()
-    func updateCryptoComparePrice()
+    func updatePrices()
 }
 
 class MainPresenter {
     unowned var view: MainViewProtocol
-    var networking: NetworkingProtocol
     
-    init(view: MainViewProtocol, networking: NetworkingProtocol = Networking()) {
+    var coinMarketPriceWithTimestamp: PriceWithTimestamp?
+    var cryptoComparePriceWithTimestamp: PriceWithTimestamp?
+    
+    var coinMarketPriceGetter: PriceGetterProtocol
+    var cryptoComparePriceGetter: PriceGetterProtocol
+    
+    init(view: MainViewProtocol,
+         coinMarketPriceGetter: PriceGetterProtocol = CoinMarketPriceGetter(),
+         cryptoComparePriceGetter: PriceGetterProtocol = CryptoComparePriceGetter()) {
         self.view = view
-        self.networking = networking
+        self.coinMarketPriceGetter = coinMarketPriceGetter
+        self.cryptoComparePriceGetter = cryptoComparePriceGetter
     }
 }
 
 extension MainPresenter: MainPresenterProtocol {
-    func updateCoinMarketPrice() {
-        self.networking.sendRequest(urlString: ApplicationConstants.CoinMarketUrl) { [weak self] (response) in
-            let dataModel: CoinMarketDataModel? = DataDeserializer().deserialize(serverResponse: response)
-            let the1 = dataModel?.data?.the1
-            self?.handle(timestamp: the1?.lastUpdated,
-                         price: the1?.quotes?.usd?.price,
-                         updatePriceCompletion: self?.view.updateCoinMarketPrice,
-                         showErrorCompletion: self?.view.showCoinMarketError)
+    func updatePrices() {
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        self.coinMarketPriceGetter.getPrice { [weak self] (priceWithTimestamp) in
+            priceWithTimestamp.map { self?.coinMarketPriceWithTimestamp = $0 }
+            group.leave()
         }
-    }
-    
-    func updateCryptoComparePrice() {
-        self.networking.sendRequest(urlString: ApplicationConstants.CryptoCompareUrl) { [weak self] (response) in
-            let dataModel: CryptoCompareDataModel? = DataDeserializer().deserialize(serverResponse: response)
-            let btcusd = dataModel?.raw?.btc?.usd
-            self?.handle(timestamp: btcusd?.lastUpdate,
-                         price: btcusd?.price,
-                         updatePriceCompletion: self?.view.updateCryptoComparePrice,
-                         showErrorCompletion: self?.view.showCryptoCompareError)
+        
+        group.enter()
+        self.cryptoComparePriceGetter.getPrice { [weak self] (priceWithTimestamp) in
+            priceWithTimestamp.map { self?.cryptoComparePriceWithTimestamp = $0 }
+            group.leave()
         }
-    }
-    
-    private func handle(timestamp: Int?,
-                        price: Double?,
-                        updatePriceCompletion: ((Int, Double) -> Void)?,
-                        showErrorCompletion: (() -> Void)?) {
-        if let timestamp = timestamp, let price = price {
-            updatePriceCompletion?(timestamp, price)
-        } else {
-            showErrorCompletion?()
+        
+        group.notify(queue: .main) { [weak self] in
+            if let coinMarketPriceWithTimestamp = self?.coinMarketPriceWithTimestamp, let cryptoComparePriceWithTimestamp = self?.cryptoComparePriceWithTimestamp {
+                self?.view.updateCoinMarketPrice(timestamp: coinMarketPriceWithTimestamp.timestamp,
+                                                 price: coinMarketPriceWithTimestamp.price)
+                self?.view.updateCryptoComparePrice(timestamp: cryptoComparePriceWithTimestamp.timestamp,
+                                                    price: cryptoComparePriceWithTimestamp.price)
+            } else {
+                self?.view.showError()
+            }
         }
     }
 }

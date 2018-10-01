@@ -11,9 +11,8 @@ import UIKit
 // sourcery: AutoMockable
 protocol MainViewProtocol: class {
     func updateCoinMarketPrice(timestamp: Int, price: Double)
-    func showCoinMarketError()
     func updateCryptoComparePrice(timestamp: Int, price: Double)
-    func showCryptoCompareError()
+    func showError()
 }
 
 class MainView: UIViewController {
@@ -39,8 +38,7 @@ class MainView: UIViewController {
     private func updatePrices() {
         self.CoinMarketLabel.text = "Coin Market: updating..."
         self.CryptoCompareLabel.text = "Crypto Compare: updating..."
-        self.presenter.updateCoinMarketPrice()
-        self.presenter.updateCryptoComparePrice()
+        self.presenter.updatePrices()
     }
 }
 
@@ -51,20 +49,15 @@ extension MainView: MainViewProtocol {
         }
     }
     
-    func showCoinMarketError() {
-        DispatchQueue.main.async {
-            self.CoinMarketLabel.text = "Coin Market: error"
-        }
-    }
-    
     func updateCryptoComparePrice(timestamp: Int, price: Double) {
         DispatchQueue.main.async {
             self.CryptoCompareLabel.text = "Crypto Compare:\ntimestamp: \(timestamp)\nprice: \(price)"
         }
     }
     
-    func showCryptoCompareError() {
+    func showError() {
         DispatchQueue.main.async {
+            self.CoinMarketLabel.text = "Coin Market: error"
             self.CryptoCompareLabel.text = "Crypto Compare: error"
         }
     }

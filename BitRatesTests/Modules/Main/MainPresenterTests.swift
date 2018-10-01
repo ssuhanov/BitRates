@@ -11,125 +11,82 @@ import XCTest
 
 class MainPresenterTests: XCTestCase {
     var instance: MainPresenter!
+    
     var viewMock: MainViewProtocolMock!
-    var networkingMock: NetworkingProtocolMock!
+    var coinMarketPriceGetterMock: PriceGetterProtocolMock!
+    var cryptoComparePriceGetterMock: PriceGetterProtocolMock!
     
-    var coinMarketDataModel: CoinMarketDataModel!
-    var cryptoCompareDataModel: CryptoCompareDataModel!
-    
-    var serverResponse: ServerResponse = .wrongRequest
-    
-    let correctTimestamp: Int = 12345678
-    let correctPrice: Double = 123456.654321
-    
+    var coinMarketPriceWithTimestamp: PriceWithTimestamp?
+    var cryptoComparePriceWithTimestamp: PriceWithTimestamp?
+
+    let correctCoinMarketTimestamp: Int = 12345678
+    let correctCoinMarketPrice: Double = 123456.654321
+    let correctCryptoCompareTimestamp: Int = 865432
+    let correctCryptoComparePrice: Double = 76543.234567
+
     override func setUp() {
         super.setUp()
-        
-        self.coinMarketDataModel = self.prepareCoinMarketDataModel()
-        self.cryptoCompareDataModel = self.prepareCryptoCompareDataModel()
-        
-        self.viewMock = MainViewProtocolMock()
-        self.networkingMock = NetworkingProtocolMock()
-        when(self.networkingMock).sendRequestUrlStringCompletion().then { (_, completion) in
-            completion?(self.serverResponse)
-        }
-        self.instance = MainPresenter(view: self.viewMock, networking: self.networkingMock)
-    }
-    
-    private func prepareCoinMarketDataModel() -> CoinMarketDataModel {
-        return CoinMarketDataModel.builder
-            .data(CMData.builder
-                .the1(CMThe1.builder
-                    .lastUpdated(self.correctTimestamp)
-                    .quotes(CMQuotes.builder
-                        .usd(CMUsd.builder
-                            .price(self.correctPrice)
-                            .build())
-                        .build())
-                    .build())
-                .build())
-            .build()
-    }
-    
-    private func prepareCryptoCompareDataModel() -> CryptoCompareDataModel {
-        return CryptoCompareDataModel.builder
-            .raw(CCRaw.builder
-                .btc(CCBtc.builder
-                    .usd(CCUsd.builder
-                        .lastUpdate(self.correctTimestamp)
-                        .price(self.correctPrice)
-                        .build())
-                    .build())
-                .build())
-            .build()
-    }
-    
-    // MARK: - Coin market
-    
-    func testNetworkingCalledForCMPriceUpdating() {
-        self.instance.updateCoinMarketPrice()
-        verify(self.networkingMock).sendRequestUrlStringCompletion().urlString(equalsTo: ApplicationConstants.CoinMarketUrl)
-    }
-    
-    func testUpdateCMPriceCalledWithCorrectData() {
-        let data = try? JSONEncoder().encode(self.coinMarketDataModel)
-        self.serverResponse = .success(data: data)
-        self.instance.updateCoinMarketPrice()
-        verify(self.viewMock).updateCoinMarketPriceTimestampPrice()
-            .timestamp(equalsTo: self.correctTimestamp)
-            .price(equalsTo: self.correctPrice)
-    }
-    
-    func testShowCMErrorWithoutData() {
-        self.serverResponse = .success(data: nil)
-        self.instance.updateCoinMarketPrice()
-        verify(self.viewMock).showCoinMarketError()
-    }
-    
-    func testShowCMErrorWithServerError() {
-        self.serverResponse = .failure(error: NSError())
-        self.instance.updateCoinMarketPrice()
-        verify(self.viewMock).showCoinMarketError()
-    }
-    
-    func testShowCMErrorWithWrongRequest() {
-        self.serverResponse = .wrongRequest
-        self.instance.updateCoinMarketPrice()
-        verify(self.viewMock).showCoinMarketError()
-    }
-    
-    // MARK: - Crypto compare
-    
-    func testNetworkingCalledForCCPriceUpdating() {
-        self.instance.updateCryptoComparePrice()
-        verify(self.networkingMock).sendRequestUrlStringCompletion().urlString(equalsTo: ApplicationConstants.CryptoCompareUrl)
-    }
-    
-    func testUpdateCCPriceCalledWithCorrectData() {
-        let data = try? JSONEncoder().encode(self.cryptoCompareDataModel)
-        self.serverResponse = .success(data: data)
-        self.instance.updateCryptoComparePrice()
-        verify(self.viewMock).updateCryptoComparePriceTimestampPrice()
-            .timestamp(equalsTo: self.correctTimestamp)
-            .price(equalsTo: self.correctPrice)
-    }
-    
-    func testShowCCErrorWithoutData() {
-        self.serverResponse = .success(data: nil)
-        self.instance.updateCryptoComparePrice()
-        verify(self.viewMock).showCryptoCompareError()
-    }
-    
-    func testShowCCErrorWithServerError() {
-        self.serverResponse = .failure(error: NSError())
-        self.instance.updateCryptoComparePrice()
-        verify(self.viewMock).showCryptoCompareError()
-    }
-    
-    func testShowCCErrorWithWrongRequest() {
-        self.serverResponse = .wrongRequest
-        self.instance.updateCryptoComparePrice()
-        verify(self.viewMock).showCryptoCompareError()
-    }
 
+        self.viewMock = MainViewProtocolMock()
+        self.coinMarketPriceGetterMock = PriceGetterProtocolMock()
+        when(self.coinMarketPriceGetterMock).getPriceCompletion().then { (completion) in
+            completion?(self.coinMarketPriceWithTimestamp)
+        }
+        self.cryptoComparePriceGetterMock = PriceGetterProtocolMock()
+        when(self.cryptoComparePriceGetterMock).getPriceCompletion().then { (completion) in
+            completion?(self.cryptoComparePriceWithTimestamp)
+        }
+        self.instance = MainPresenter(view: self.viewMock,
+                                      coinMarketPriceGetter: self.coinMarketPriceGetterMock,
+                                      cryptoComparePriceGetter: self.cryptoComparePriceGetterMock)
+    }
+    
+    func testCoinMarketPriceGetterCalled() {
+        self.instance.updatePrices()
+        verify(self.coinMarketPriceGetterMock).getPriceCompletion()
+    }
+    
+    func testCryptoComparePriceGetterCalled() {
+        self.instance.updatePrices()
+        verify(self.cryptoComparePriceGetterMock).getPriceCompletion()
+    }
+    
+    // TODO: - implement logic tests
+
+//    func testUpdatePricesCalledWithCorrectData() {
+//        self.coinMarketPriceWithTimestamp = PriceWithTimestamp(timestamp: self.correctCoinMarketTimestamp,
+//                                                               price: self.correctCoinMarketPrice)
+//        self.cryptoComparePriceWithTimestamp = PriceWithTimestamp(timestamp: self.correctCryptoCompareTimestamp,
+//                                                                  price: self.correctCryptoComparePrice)
+//        self.instance.updatePrices()
+//        verify(self.viewMock).updateCoinMarketPriceTimestampPrice()
+//            .timestamp(equalsTo: self.correctCoinMarketTimestamp)
+//            .price(equalsTo: self.correctCoinMarketPrice)
+//        verify(self.viewMock).updateCryptoComparePriceTimestampPrice()
+//            .timestamp(equalsTo: self.correctCryptoCompareTimestamp)
+//            .price(equalsTo: self.correctCryptoComparePrice)
+//    }
+//
+//    func testShowErrorCalledWithoutCoinMarketData() {
+//        self.coinMarketPriceWithTimestamp = nil
+//        self.cryptoComparePriceWithTimestamp = PriceWithTimestamp(timestamp: self.correctCryptoCompareTimestamp,
+//                                                                  price: self.correctCryptoComparePrice)
+//        self.instance.updatePrices()
+//        verify(self.viewMock).showError()
+//    }
+//
+//    func testShowErrorCalledWithoutCryptoCompareData() {
+//        self.coinMarketPriceWithTimestamp = PriceWithTimestamp(timestamp: self.correctCoinMarketTimestamp,
+//                                                               price: self.correctCoinMarketPrice)
+//        self.cryptoComparePriceWithTimestamp = nil
+//        self.instance.updatePrices()
+//        verify(self.viewMock).showError()
+//    }
+//
+//    func testShowErrorCalledWithoutData() {
+//        self.coinMarketPriceWithTimestamp = nil
+//        self.cryptoComparePriceWithTimestamp = nil
+//        self.instance.updatePrices()
+//        verify(self.viewMock).showError()
+//    }
 }
