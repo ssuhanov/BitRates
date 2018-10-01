@@ -76,6 +76,7 @@ extension MainView: MainViewProtocol {
             self.chartView?.removeFromSuperview()
             self.chartView = chart.view
             self.view.addSubview(chart.view)
+            self.view.bringSubview(toFront: self.refreshButton)
         }
     }
     
