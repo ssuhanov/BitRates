@@ -60,7 +60,7 @@ extension MainView: MainViewProtocol {
             yAxisConfig: ChartAxisConfig(from: minPrice-2.0, to: maxPrice+2.0, by: 1)
         )
         
-        let frame = CGRect(x: 0, y: 70, width: 300, height: 500)
+        let frame = CGRect(x: -20, y: 70, width: 300, height: 500)
         
         let chart = LineChart(
             frame: frame,
