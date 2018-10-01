@@ -8,6 +8,8 @@
 
 import Foundation
 
+private let Timeout: TimeInterval = 60.0
+
 // sourcery: AutoMockable
 protocol MainPresenterProtocol {
     func updatePrices()
@@ -50,10 +52,15 @@ extension MainPresenter: MainPresenterProtocol {
         
         group.notify(queue: .main) { [weak self] in
             if let coinMarketPriceWithTimestamp = self?.coinMarketPriceWithTimestamp, let cryptoComparePriceWithTimestamp = self?.cryptoComparePriceWithTimestamp {
+                // TODO: - cache data to CoreData here
                 self?.view.updateCoinMarketPrice(timestamp: coinMarketPriceWithTimestamp.timestamp,
                                                  price: coinMarketPriceWithTimestamp.price)
                 self?.view.updateCryptoComparePrice(timestamp: cryptoComparePriceWithTimestamp.timestamp,
                                                     price: cryptoComparePriceWithTimestamp.price)
+                self?.view.disableRefreshButton()
+                DispatchQueue.main.asyncAfter(deadline: .now() + Timeout, execute: {
+                    self?.view.enableRefreshButton()
+                })
             } else {
                 self?.view.showError()
             }

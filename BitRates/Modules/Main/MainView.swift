@@ -13,13 +13,16 @@ protocol MainViewProtocol: class {
     func updateCoinMarketPrice(timestamp: Int, price: Double)
     func updateCryptoComparePrice(timestamp: Int, price: Double)
     func showError()
+    func enableRefreshButton()
+    func disableRefreshButton()
 }
 
 class MainView: UIViewController {
     var presenter: MainPresenterProtocol!
     
-    @IBOutlet weak var CoinMarketLabel: UILabel!
-    @IBOutlet weak var CryptoCompareLabel: UILabel!
+    @IBOutlet weak var coinMarketLabel: UILabel!
+    @IBOutlet weak var cryptoCompareLabel: UILabel!
+    @IBOutlet weak var refreshButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,8 +39,8 @@ class MainView: UIViewController {
     }
     
     private func updatePrices() {
-        self.CoinMarketLabel.text = "Coin Market: updating..."
-        self.CryptoCompareLabel.text = "Crypto Compare: updating..."
+        self.coinMarketLabel.text = "Coin Market: updating..."
+        self.cryptoCompareLabel.text = "Crypto Compare: updating..."
         self.presenter.updatePrices()
     }
 }
@@ -45,20 +48,32 @@ class MainView: UIViewController {
 extension MainView: MainViewProtocol {
     func updateCoinMarketPrice(timestamp: Int, price: Double) {
         DispatchQueue.main.async {
-            self.CoinMarketLabel.text = "Coin Market:\ntimestamp: \(timestamp)\nprice: \(price)"
+            self.coinMarketLabel.text = "Coin Market:\ntimestamp: \(timestamp)\nprice: \(price)"
         }
     }
     
     func updateCryptoComparePrice(timestamp: Int, price: Double) {
         DispatchQueue.main.async {
-            self.CryptoCompareLabel.text = "Crypto Compare:\ntimestamp: \(timestamp)\nprice: \(price)"
+            self.cryptoCompareLabel.text = "Crypto Compare:\ntimestamp: \(timestamp)\nprice: \(price)"
         }
     }
     
     func showError() {
         DispatchQueue.main.async {
-            self.CoinMarketLabel.text = "Coin Market: error"
-            self.CryptoCompareLabel.text = "Crypto Compare: error"
+            self.coinMarketLabel.text = "Coin Market: error"
+            self.cryptoCompareLabel.text = "Crypto Compare: error"
+        }
+    }
+    
+    func enableRefreshButton() {
+        DispatchQueue.main.async {
+            self.refreshButton.isEnabled = true
+        }
+    }
+    
+    func disableRefreshButton() {
+        DispatchQueue.main.async {
+            self.refreshButton.isEnabled = false
         }
     }
 }

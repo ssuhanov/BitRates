@@ -53,8 +53,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="CoinMarketLabel" destination="Z8P-GY-mbr" id="iU2-gA-VbI"/>
-                        <outlet property="CryptoCompareLabel" destination="zVl-mD-HVn" id="sOr-uo-cKY"/>
+                        <outlet property="coinMarketLabel" destination="Z8P-GY-mbr" id="bS3-bM-4wZ"/>
+                        <outlet property="cryptoCompareLabel" destination="zVl-mD-HVn" id="Sx1-z0-MHP"/>
+                        <outlet property="refreshButton" destination="Knp-iK-cLy" id="C1d-9e-qGp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
