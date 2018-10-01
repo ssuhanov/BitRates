@@ -56,12 +56,7 @@ extension MainPresenter: MainPresenterProtocol {
                                  coinMarketPrice: coinMarketPriceWithTimestamp.price,
                                  cryptoComparePrice: cryptoComparePriceWithTimestamp.price) { _ in
                                     // TODO: - show graph on UI with DB_Prices.fetchAllByTimestamp()
-                                    
                 }
-                self?.view.updateCoinMarketPrice(timestamp: coinMarketPriceWithTimestamp.timestamp,
-                                                 price: coinMarketPriceWithTimestamp.price)
-                self?.view.updateCryptoComparePrice(timestamp: cryptoComparePriceWithTimestamp.timestamp,
-                                                    price: cryptoComparePriceWithTimestamp.price)
                 self?.view.disableRefreshButton()
                 DispatchQueue.main.asyncAfter(deadline: .now() + Timeout, execute: {
                     self?.view.enableRefreshButton()

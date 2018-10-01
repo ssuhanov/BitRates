@@ -10,8 +10,7 @@ import UIKit
 
 // sourcery: AutoMockable
 protocol MainViewProtocol: class {
-    func updateCoinMarketPrice(timestamp: Int, price: Double)
-    func updateCryptoComparePrice(timestamp: Int, price: Double)
+    func updateChart(prices: [DB_Prices])
     func showError()
     func enableRefreshButton()
     func disableRefreshButton()
@@ -20,8 +19,6 @@ protocol MainViewProtocol: class {
 class MainView: UIViewController {
     var presenter: MainPresenterProtocol!
     
-    @IBOutlet weak var coinMarketLabel: UILabel!
-    @IBOutlet weak var cryptoCompareLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
     
     override func awakeFromNib() {
@@ -39,29 +36,20 @@ class MainView: UIViewController {
     }
     
     private func updatePrices() {
-        self.coinMarketLabel.text = "Coin Market: updating..."
-        self.cryptoCompareLabel.text = "Crypto Compare: updating..."
         self.presenter.updatePrices()
     }
 }
 
 extension MainView: MainViewProtocol {
-    func updateCoinMarketPrice(timestamp: Int, price: Double) {
-        DispatchQueue.main.async {
-            self.coinMarketLabel.text = "Coin Market:\ntimestamp: \(timestamp)\nprice: \(price)"
-        }
-    }
-    
-    func updateCryptoComparePrice(timestamp: Int, price: Double) {
-        DispatchQueue.main.async {
-            self.cryptoCompareLabel.text = "Crypto Compare:\ntimestamp: \(timestamp)\nprice: \(price)"
-        }
+    func updateChart(prices: [DB_Prices]) {
+        // TODO: - update chart here
     }
     
     func showError() {
         DispatchQueue.main.async {
-            self.coinMarketLabel.text = "Coin Market: error"
-            self.cryptoCompareLabel.text = "Crypto Compare: error"
+            let alertController = UIAlertController(title: "Error", message: "Something went wrong while price updating :(", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alertController, animated: true)
         }
     }
     

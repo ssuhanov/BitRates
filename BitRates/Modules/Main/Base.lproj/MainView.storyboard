@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,35 +25,15 @@
                                     <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jsr-eU-FiQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8P-GY-mbr">
-                                <rect key="frame" x="16" y="281" width="343" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVl-mD-HVn">
-                                <rect key="frame" x="16" y="365.5" width="343" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="zVl-mD-HVn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="6Do-cv-jkx"/>
-                            <constraint firstItem="zVl-mD-HVn" firstAttribute="top" secondItem="Z8P-GY-mbr" secondAttribute="bottom" constant="64" id="6Gl-kL-47O"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Knp-iK-cLy" secondAttribute="bottom" constant="20" id="8uO-iZ-Op0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zVl-mD-HVn" secondAttribute="trailing" constant="16" id="Oaq-8z-MW0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Z8P-GY-mbr" secondAttribute="trailing" constant="16" id="etE-Ng-bNL"/>
                             <constraint firstItem="Knp-iK-cLy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gPZ-aG-TZL"/>
-                            <constraint firstItem="Z8P-GY-mbr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wuD-Or-13I"/>
-                            <constraint firstItem="Z8P-GY-mbr" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-32" id="zHy-yB-uI9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="coinMarketLabel" destination="Z8P-GY-mbr" id="bS3-bM-4wZ"/>
-                        <outlet property="cryptoCompareLabel" destination="zVl-mD-HVn" id="Sx1-z0-MHP"/>
                         <outlet property="refreshButton" destination="Knp-iK-cLy" id="C1d-9e-qGp"/>
                     </connections>
                 </viewController>
