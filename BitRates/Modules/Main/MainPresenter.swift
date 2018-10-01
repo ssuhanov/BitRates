@@ -34,7 +34,7 @@ class MainPresenter {
 }
 
 extension MainPresenter: MainPresenterProtocol {
-    func updatePrices(disableRefresh: Bool) {
+    func updatePrices(disableRefresh: Bool = true) {
         
         let group = DispatchGroup()
         
