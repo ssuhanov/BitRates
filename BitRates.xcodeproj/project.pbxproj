@@ -29,6 +29,7 @@
 		B235446E2161FF7B00390913 /* PriceGetters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235446D2161FF7B00390913 /* PriceGetters.swift */; };
 		B23544702162006200390913 /* PriceGettersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235446F2162006200390913 /* PriceGettersTests.swift */; };
 		B2BD548E216221E700AAE3E0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD548D216221E700AAE3E0 /* CoreDataManager.swift */; };
+		B2BD5490216223C000AAE3E0 /* DB_Prices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD548F216223C000AAE3E0 /* DB_Prices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		B235446D2161FF7B00390913 /* PriceGetters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceGetters.swift; sourceTree = "<group>"; };
 		B235446F2162006200390913 /* PriceGettersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceGettersTests.swift; sourceTree = "<group>"; };
 		B2BD548D216221E700AAE3E0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B2BD548F216223C000AAE3E0 /* DB_Prices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_Prices.swift; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,6 +208,7 @@
 			children = (
 				B235445D2160B46F00390913 /* CoinMarketDataModel.swift */,
 				B23544632160B99800390913 /* CryptoCompareDataModel.swift */,
+				B2BD548F216223C000AAE3E0 /* DB_Prices.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				B2354410215F7A5A00390913 /* AppDelegate.swift in Sources */,
 				B2BD548E216221E700AAE3E0 /* CoreDataManager.swift in Sources */,
 				B23544682160BB9000390913 /* MainPresenter.swift in Sources */,
+				B2BD5490216223C000AAE3E0 /* DB_Prices.swift in Sources */,
 				B235445E2160B46F00390913 /* CoinMarketDataModel.swift in Sources */,
 				B2354440215F875A00390913 /* URLSessionInterlayer.swift in Sources */,
 				B23544602160B54B00390913 /* DataDeserializer.swift in Sources */,
