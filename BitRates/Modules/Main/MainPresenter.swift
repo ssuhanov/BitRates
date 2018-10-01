@@ -55,7 +55,7 @@ extension MainPresenter: MainPresenterProtocol {
                 DB_Prices.create(timestamp: max(coinMarketPriceWithTimestamp.timestamp, cryptoComparePriceWithTimestamp.timestamp),
                                  coinMarketPrice: coinMarketPriceWithTimestamp.price,
                                  cryptoComparePrice: cryptoComparePriceWithTimestamp.price) { _ in
-                                    // TODO: - show graph on UI with DB_Prices.fetchAllByTimestamp()
+                                    DB_Prices.fetchAllByTimestamp().map { self?.view.updateChart(prices: $0) }
                 }
                 self?.view.disableRefreshButton()
                 DispatchQueue.main.asyncAfter(deadline: .now() + Timeout, execute: {
