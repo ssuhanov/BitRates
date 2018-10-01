@@ -26,6 +26,8 @@
 		B23544642160B99800390913 /* CryptoCompareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23544632160B99800390913 /* CryptoCompareDataModel.swift */; };
 		B23544682160BB9000390913 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23544672160BB9000390913 /* MainPresenter.swift */; };
 		B235446C2160BCC600390913 /* MainPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235446B2160BCC600390913 /* MainPresenterTests.swift */; };
+		B235446E2161FF7B00390913 /* PriceGetters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235446D2161FF7B00390913 /* PriceGetters.swift */; };
+		B23544702162006200390913 /* PriceGettersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B235446F2162006200390913 /* PriceGettersTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		B23544632160B99800390913 /* CryptoCompareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCompareDataModel.swift; sourceTree = "<group>"; };
 		B23544672160BB9000390913 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		B235446B2160BCC600390913 /* MainPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterTests.swift; sourceTree = "<group>"; };
+		B235446D2161FF7B00390913 /* PriceGetters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceGetters.swift; sourceTree = "<group>"; };
+		B235446F2162006200390913 /* PriceGettersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceGettersTests.swift; sourceTree = "<group>"; };
 		D881D6AEA7DAEC81211D64E9 /* Pods_BitRatesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitRatesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1E7F63A0D4675755C1768 /* Pods-BitRatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitRatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitRatesTests/Pods-BitRatesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				B235443C215F869F00390913 /* Networking */,
+				B235446D2161FF7B00390913 /* PriceGetters.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				B2354442215F920400390913 /* Networking */,
+				B235446F2162006200390913 /* PriceGettersTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B235446E2161FF7B00390913 /* PriceGetters.swift in Sources */,
 				B23544642160B99800390913 /* CryptoCompareDataModel.swift in Sources */,
 				B2354418215F7A5A00390913 /* BitRates.xcdatamodeld in Sources */,
 				B2354412215F7A5A00390913 /* MainView.swift in Sources */,
@@ -416,6 +423,7 @@
 			files = (
 				B2354439215F85A700390913 /* AutoBuildable.generated.swift in Sources */,
 				B235443A215F85A700390913 /* AutoMockable.generated.swift in Sources */,
+				B23544702162006200390913 /* PriceGettersTests.swift in Sources */,
 				B235446C2160BCC600390913 /* MainPresenterTests.swift in Sources */,
 				B23544622160B75100390913 /* DataDeserializerTests.swift in Sources */,
 				B2354446215F938800390913 /* NetworkingTests.swift in Sources */,
